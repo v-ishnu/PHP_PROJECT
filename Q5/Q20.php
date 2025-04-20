@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Book Management</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #514313;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            text-align: center;
+            width: 100%;
+            max-width: 500px;
+            transition: transform 0.3s ease;
+            box-sizing: border-box;
+        }
+        .container:hover {
+            transform: translateY(-5px);
+        }
+        .container h1 {
+            font-size: clamp(20px, 4vw, 24px);
+            margin-bottom: 20px;
+            color: #2c3e50;
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        .container h1::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: #007bff;
+            border-radius: 3px;
+        }
+        .input-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        .container label {
+            font-size: clamp(14px, 3vw, 16px);
+            color: #555;
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        .container input[type="text"],
+        .container input[type="number"] {
+            width: 100%;
+            padding: 12px 15px;
+            margin: 5px 0;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: clamp(14px, 3vw, 16px);
+            transition: border 0.3s ease;
+            box-sizing: border-box;
+        }
+        .container input[type="text"]:focus,
+        .container input[type="number"]:focus {
+            border-color: #007bff;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+        }
+        .container input[type="submit"] {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: clamp(14px, 3vw, 16px);
+            font-weight: 500;
+            width: 100%;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+        .container input[type="submit"]:hover {
+            background-color: #0069d9;
+            box-shadow: 0 4px 8px rgba(0, 123, 255, 0.2);
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 6px;
+            background-color: #f8f9fa;
+            font-size: clamp(14px, 3vw, 16px);
+            color: #2c3e50;
+            font-weight: 500;
+            text-align: left;
+            animation: fadeIn 0.5s ease;
+            border-left: 4px solid #007bff;
+        }
+        .book-details {
+            padding: 15px;
+            background-color: #e9ecef;
+            border-radius: 6px;
+            margin-top: 15px;
+        }
+        .book-property {
+            margin-bottom: 8px;
+        }
+        .book-property strong {
+            color: #007bff;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px;
+            }
+            .result {
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Book Management</h1>
+        <form method="post" action="">
+            <div class="input-group">
+                <label for="title">Book Title:</label>
+                <input type="text" name="title" id="title" value="<?php echo htmlspecialchars($_POST['title'] ?? ''); ?>" required>
+            </div>
+            <div class="input-group">
+                <label for="author">Author:</label>
+                <input type="text" name="author" id="author" value="<?php echo htmlspecialchars($_POST['author'] ?? ''); ?>" required>
+            </div>
+            <div class="input-group">
+                <label for="price">Price (₹):</label>
+                <input type="number" name="price" id="price" step="0.01" min="0" value="<?php echo htmlspecialchars($_POST['price'] ?? ''); ?>" required>
+            </div>
+            <input type="submit" name="submit" value="Add Book">
+        </form>
+
+        <?php
+        class Book {
+            private $title;
+            private $author;
+            private $price;
+
+            // Constructor
+            public function __construct($title = '', $author = '', $price = 0) {
+                $this->title = $title;
+                $this->author = $author;
+                $this->price = $price;
+            }
+
+            // Setter methods
+            public function setTitle($title) {
+                $this->title = $title;
+            }
+
+            public function setAuthor($author) {
+                $this->author = $author;
+            }
+
+            public function setPrice($price) {
+                $this->price = $price;
+            }
+
+            // Getter methods
+            public function getTitle() {
+                return $this->title;
+            }
+
+            public function getAuthor() {
+                return $this->author;
+            }
+
+            public function getPrice() {
+                return $this->price;
+            }
+
+            // Display book details
+            public function displayDetails() {
+                return [
+                    'title' => $this->title,
+                    'author' => $this->author,
+                    'price' => number_format($this->price, 2)
+                ];
+            }
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['title'])) {
+            // Create a new Book instance
+            $book = new Book();
+
+            // Set book details using setter methods
+            $book->setTitle($_POST['title']);
+            $book->setAuthor($_POST['author']);
+            $book->setPrice($_POST['price']);
+
+            // Get book details
+            $details = $book->displayDetails();
+
+            echo '<div class="result">';
+            echo '<h3>Book Details:</h3>';
+            echo '<div class="book-details">';
+            echo '<div class="book-property"><strong>Title:</strong> ' . htmlspecialchars($details['title']) . '</div>';
+            echo '<div class="book-property"><strong>Author:</strong> ' . htmlspecialchars($details['author']) . '</div>';
+            echo '<div class="book-property"><strong>Price:</strong> ₹' . htmlspecialchars($details['price']) . '</div>';
+            echo '</div>';
+            echo '</div>';
+        }
+        ?>
+    </div>
+</body>
+</html>

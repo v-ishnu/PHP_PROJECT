@@ -1,0 +1,49 @@
+🟩 1. Programming Logic & Constructs
+    1. Develop a PHP program that accepts two numbers from the user and determines the larger number.
+    2. Implement a PHP script to check whether a given number is prime or not.
+    3. Create a PHP script that takes a string input and reverses it without using built-in string functions.
+    4. Write a PHP program that accepts input from the user and generates the Fibonacci series up to a given number using loops.
+    5. Write a PHP program that takes a number as input from the user and uses a user-defined recursive function to calculate and display its factorial.
+
+🟦 2. Functions in PHP
+    6. Write a PHP function that takes an array of numbers and returns the sum of its elements.
+    7. Create a user-defined function that calculates the factorial of a given number using recursion.
+    8. Develop an anonymous function in PHP that checks whether a given number is even or odd.
+    9. Implement a PHP script using a function that converts temperature from Celsius to Fahrenheit and vice versa.
+
+🟨 3. String Handling
+    10. Write a PHP program to count the number of words, characters, and vowels in a given string.
+    11. Develop a PHP script that replaces a specific word in a string with another word provided by the user.
+    12. Create a PHP program to find the frequency of a particular character in a string.
+    13. Implement a PHP script to extract all numeric values from a given string.
+    14. Develop a PHP program that accepts a string from the user and performs the following operations using string functions:
+    • Convert to uppercase and lowercase
+    • Find the length
+    • Count the words
+    • Reverse the string
+
+🟪 4. Arrays in PHP
+    15. Create a PHP script that sorts an array of integers in ascending and descending order using built-in functions.
+    16. Write a PHP program to implement a multi-dimensional array to store student records (name, marks, subject) and display them in a tabular format.
+    17. Develop a PHP program that merges two arrays and removes duplicate elements.
+    18. Implement a PHP script that finds the maximum and minimum values from an array without using built-in functions.
+    19. Create an array of student names and their corresponding grades. Write a PHP program to calculate and display:
+    • Average grade
+    • Highest grade
+    • Lowest grade
+    • List of students who scored below a certain grade
+
+🟫 5. Object-Oriented Programming (Classes & Inheritance)
+    20. Write a PHP class named Book with properties (title, author, price) and methods to set and display the book details.
+    21. Develop a PHP program demonstrating inheritance by creating a Vehicle class with a method move(), and a Car class extending Vehicle with an additional method fuelType().
+
+🟥 6. Database Handling (MySQLi)
+    22. Create a PHP script that connects to a MySQL database, creates a table for storing employee details (ID, Name, Salary), and inserts records into it.
+    23. Develop a PHP program to fetch and display all records from the employee table in a tabular format with an option to delete a record.
+
+🟧 7. Image Processing with GD Library
+    24. Write a PHP script to embed an image in a web page using PHP. Allow the user to upload an image and display it dynamically.
+    25. Create a PHP program that generates a blank image of 400x400 pixels and draws a rectangle, circle, and line using GD functions.
+    26. Develop a PHP script that writes a given text string on an image using different font sizes and colors.
+    27. Implement a PHP script to resize an uploaded image to a specified width and height while maintaining its aspect ratio.
+    28. Write a PHP program to create an image with a gradient background and add text to it in different colors.
