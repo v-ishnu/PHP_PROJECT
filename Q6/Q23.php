@@ -162,7 +162,7 @@
                     echo '<tr>';
                     echo '<td>' . $employee['id'] . '</td>';
                     echo '<td>' . htmlspecialchars($employee['name']) . '</td>';
-                    echo '<td>$' . number_format($employee['salary'], 2) . '</td>';
+                    echo '<td>₹' . number_format($employee['salary'], 2) . '</td>';
                     echo '<td>' . date('M j, Y', strtotime($employee['reg_date'])) . '</td>';
                     echo '<td><a href="?delete_id=' . $employee['id'] . '" class="delete-btn" onclick="return confirm(\'Are you sure you want to delete this record?\')">Delete</a></td>';
                     echo '</tr>';
